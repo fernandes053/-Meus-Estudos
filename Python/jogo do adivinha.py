@@ -1,47 +1,56 @@
 import random
 
-def main():
-    print("********************************")
-    print("    Jogo da Adivinhacao       ")
-    print("******************************")
-    print("\n")
-    print("Escolha seu nivel de dificuldade:")
-    print("Facil (F)  Medio (M)  Dificil (D)")
 
-    dificuldade = input("\n").upper()
-    resposta = random.randint(1, 100)
-    tentativas = 0
+num_secreto = random.randint(2, 101)
+pontos=100
 
-    if dificuldade == 'F':
-        tentativas = 15
-        print("\nVoce escolheu o modo facil, Chute o numero que estou pensando (1-100):")
-    elif dificuldade == 'M':
-        tentativas = 10
-        print("\nVoce escolheu o modo medio, Chute o numero que estou pensando (1-100):")
-    elif dificuldade == 'D':
-        tentativas = 5
-        print("\nVoce escolheu o modo dificil, Chute o numero que estou pensando (1-100):")
+print("**********************")
+print("   Jogo do Adivinha   ")
+print("**********************")
+
+
+print("Escolha sua dificuldade:")
+print("1 - Fácil (10 tentativas)")
+print("2 - Médio (6 tentativas)")
+print("3 - Difícil (3 tentativas)")
+
+dificuldade = int(input("Digite o número da dificuldade: "))
+
+
+while dificuldade < 1 or dificuldade > 3:
+    print("Dificuldade inválida, tente novamente.")
+    dificuldade = int(input("Digite o número da dificuldade: "))
+
+
+if dificuldade == 1:
+    tentativas = 10
+elif dificuldade == 2:
+    tentativas = 6
+else:
+    tentativas = 3
+
+
+for tentativa in range(1, tentativas + 1):
+    print(f"\nTentativa {tentativa} de {tentativas}")
+    palpite = int(input("Digite seu palpite (1 a 100): "))
+
+    if palpite < 1 or palpite > 100:
+        print("Palpite fora do intervalo! Tente entre 1 e 100.")
+        continue
+
+    if palpite == num_secreto:
+        print(f"Parabéns! Você acertou o número {num_secreto}! / Pontuacao: ", pontos)
+        break
+    elif palpite > num_secreto:
+        print("\nO número secreto é **maior**.")
+        pontos_perdidos=abs(num_secreto-palpite)
+        pontos=abs(pontos-pontos_perdidos)
+
     else:
-        print("\nDificuldade invalida.")
-        return
+        print("\nO número secreto é **menor**.")
+    pontos_perdidos=abs(num_secreto-palpite)
+    pontos=abs(pontos-pontos_perdidos)
 
-    for x in range(tentativas, 0, -1):
-        try:
-            numero = int(input())
-        except ValueError:
-            print("Por favor, digite um número válido.")
-            continue
+else:
+    print(f"\nSuas tentativas acabaram! O número era {num_secreto}. Boa sorte na próxima!")
 
-        if numero < resposta:
-            print("\nNumero menor do que a resposta, tente novamente:")
-        elif numero > resposta:
-            print("\nNumero maior do que a resposta, tente novamente:")
-        else:
-            print(f"\nParabens voce acertou, o numero era {resposta}")
-            return
-
-        if x == 1:
-            print(f"\nAcabaram suas tentativas, o numero era {resposta}")
-
-if __name__ == "__main__":
-    main()
