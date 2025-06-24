@@ -6,7 +6,7 @@ Este repositório tem como objetivo documentar meus exercícios e projetos na á
 
 ## 📚 Conteúdo abordado
 
-Linguagens e tecnologias: [C++, Python, Java, SQL, etc].
+Linguagens e tecnologias: [C, Python, etc].
 
 Projetos: Desde algoritmos simples até sistemas integrados, com ênfase em boas práticas (clean code, versionamento, documentação).
 
